@@ -12,3 +12,9 @@ export const midia = sqliteTable("midia", {
   url: text().notNull(),
   name: text(),
 })
+
+export const member = sqliteTable("member", {
+  id: int().primaryKey({autoIncrement: true}),
+  name: text().notNull(),
+  password_hash: text().notNull()
+})
