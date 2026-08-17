@@ -1,0 +1,9 @@
+.banda {
+    background-image: url("../../public/banda.jpeg");
+    background-repeat: no-repeat;
+    background-size:contain;
+}
+
+.titulo {
+    -webkit-text-stroke: 2px white;
+}
