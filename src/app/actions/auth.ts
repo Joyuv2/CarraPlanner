@@ -1,9 +1,9 @@
 "use server"
 
 import { hashPassword } from "@/lib/encrypt";
-import { db, memberAdd } from "@/lib/db";
+import { memberAdd } from "@/lib/db";
 
-export async function signUpUser(formData: FormData) {
+export async function signUpMember(formData: FormData) {
     const name = formData.get('name') as string;
     const password = formData.get('password') as string;
 

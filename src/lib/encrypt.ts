@@ -6,7 +6,6 @@ const options: HashOptions = {
     parallelism: 4,
 }
 
-
 export async function hashPassword(password: string): Promise<string> {
     return await hash(password, options);
 }

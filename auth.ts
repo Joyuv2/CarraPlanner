@@ -1,0 +1,48 @@
+import NextAuth from "next-auth"
+import Credentials from "next-auth/providers/credentials"
+import { z } from "zod"
+import { memberCheck } from "@/lib/db"
+import { verifyPassword } from "@/lib/encrypt"
+
+const credentialsSchema = z.object({
+    name: z.string().min(3).max(32),
+    password: z.string().min(8)
+})
+
+export const { handlers, signIn, signOut, auth } = NextAuth({
+    session: { strategy: "jwt" },
+    providers: [
+        Credentials ({
+            credentials: {
+                name: { label: "Nome", type: "text" },
+                password: { label: "Senha", type:"password" },
+            },
+            authorize: async (raw) => {
+                const parsed = credentialsSchema.safeParse(raw)
+                if (!parsed.success) return null
+
+                const { name, password } = parsed.data
+                const [user] = await memberCheck(name)
+
+                if(!user || !user.password_hash) return null
+
+                const passwordsMatch = await verifyPassword(password, user.password_hash)
+                if (!passwordsMatch) return null
+
+                return { id: String(user.id), name: user.name }
+            },
+        }),
+    ],
+    callbacks: {
+        async jwt({ token, user }) {
+            if (user) {
+                token.id = user.id
+            }
+            return token
+        },
+
+    },
+    pages: {
+        signIn: "/login"
+    }
+})
