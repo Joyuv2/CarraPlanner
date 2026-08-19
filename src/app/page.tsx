@@ -16,8 +16,8 @@ const RockSalt = Rock_Salt({
 export default function Page() {
   return (
     <div className={`h-[45em] flex justify-center`}>
-      <Image alt={"banda"} src={"/banda.jpeg"} width={1900} height={200} className="absolute max-h-[900] min-w-full opacity-60"/>
-      <h1 className={`text-foreground-2 text-[8em] z-20 select-none ${styles.titulo} ${SedgwickAveDisplay.className}`}>Carrapatifes</h1>
+      {/* <Image alt={"banda"} src={"/banda.jpeg"} width={1900} height={200} className="absolute max-h-[900] min-w-full opacity-60"/> */}
+      {/* <h1 className={`text-foreground-2 text-[8em] z-20 select-none ${styles.titulo} ${SedgwickAveDisplay.className}`}>Carrapatifes</h1> */}
     </div>
   );
 }

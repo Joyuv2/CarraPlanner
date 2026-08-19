@@ -4,6 +4,8 @@ import Header from "@/components/Header/Header";
 import "./globals.css";
 import Link from "next/link";
 import HButton from "@/components/Header/HButton";
+import Providers from "@/components/Providers";
+import { auth } from "@/../auth" 
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,12 +27,14 @@ const buttons = [
   {href: "/midia", name: "Mídia"}
 ]
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const session = await auth();
   return (
     <html
       lang="pt-br"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
+      <Providers>
       <body className="min-h-full flex flex-col">
         <Header>
           <div className="flex flex-row gap-3 h-full w-1/3 items-center">
@@ -41,12 +45,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
               </Link>
             ))
           }
+          {session && <Link href={"/banda"}><HButton>Banda</HButton></Link>}
           </div>
         </Header>
         <main>
           {children}
         </main>
       </body>
+      </Providers>
     </html>
   );
 }

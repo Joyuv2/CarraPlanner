@@ -3,6 +3,7 @@ import Credentials from "next-auth/providers/credentials"
 import { z } from "zod"
 import { memberCheck } from "@/lib/db"
 import { verifyPassword } from "@/lib/encrypt"
+import { authConfig } from "./auth.config"
 
 const credentialsSchema = z.object({
     name: z.string().min(3).max(32),
@@ -10,6 +11,7 @@ const credentialsSchema = z.object({
 })
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
+    ...authConfig,
     session: { strategy: "jwt" },
     providers: [
         Credentials ({
