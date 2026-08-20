@@ -15,7 +15,7 @@
   --color-background-3: var(--background-3);
   --color-foreground-1: var(--foreground-1);
   --color-foreground-2: var(--foreground-2);
-  --color-foreground-3: var(--foreground-3)
+  --color-foreground-3: var(--foreground-3);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
