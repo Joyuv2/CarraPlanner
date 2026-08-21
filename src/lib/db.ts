@@ -1,7 +1,7 @@
 import 'dotenv/config';
 import { drizzle } from "drizzle-orm/libsql"
 import { createClient } from '@libsql/client';
-import { member } from '@/db/schema';
+import { member, plannings } from '@/db/schema';
 import { eq } from 'drizzle-orm';
 
 const client = createClient({ 
@@ -37,4 +37,20 @@ export async function memerDelete(id: number) {
     } catch (error) {
         return {message: "error while trying to erase data from database", error: error}
     }
+}
+
+export async function planningAdd(name:string, type:string, musics: string) {
+    try {
+        await db.insert(plannings).values({name: name, type: type, musics: musics})
+    } catch (error) {
+        return {message: "error while trying to insert", error: error}
+    }
+}
+
+export async function planningCheck(id: number) {
+    return await db.select({id: plannings.id, name: plannings.name, type: plannings.type, musics: plannings.musics}).from(plannings).where(eq(plannings.id, id))
+}
+
+export async function planningsGet() {
+    return await db.select().from(plannings);
 }

@@ -4,7 +4,7 @@ export const plannings = sqliteTable("plannings", {
   id: int().primaryKey({ autoIncrement: true }),
   name: text().notNull(),
   type: text().notNull(),
-  musics: text(),
+  musics: text().notNull(),
 });
 
 export const midia = sqliteTable("midia", {
