@@ -1,0 +1,1 @@
+ALTER TABLE `plannings` ADD `date` text NOT NULL;

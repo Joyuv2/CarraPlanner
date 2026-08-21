@@ -39,16 +39,16 @@ export async function memerDelete(id: number) {
     }
 }
 
-export async function planningAdd(name:string, type:string, musics: string) {
+export async function planningAdd(name:string, type:string, musics: string, date: string) {
     try {
-        await db.insert(plannings).values({name: name, type: type, musics: musics})
+        await db.insert(plannings).values({name: name, type: type, musics: musics, date: date})
     } catch (error) {
         return {message: "error while trying to insert", error: error}
     }
 }
 
 export async function planningCheck(id: number) {
-    return await db.select({id: plannings.id, name: plannings.name, type: plannings.type, musics: plannings.musics}).from(plannings).where(eq(plannings.id, id))
+    return await db.select({id: plannings.id, name: plannings.name, type: plannings.type, musics: plannings.musics, date: plannings.date}).from(plannings).where(eq(plannings.id, id))
 }
 
 export async function planningsGet() {
